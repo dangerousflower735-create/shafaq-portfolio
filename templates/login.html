@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Shafaq | Admin Login</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <section class="login-section">
+
+        <div class="login-card">
+
+            <p class="section-label">
+                PRIVATE AREA
+            </p>
+
+            <h1>
+                Welcome back.
+            </h1>
+
+            <p class="login-text">
+                Sign in to manage your portfolio.
+            </p>
+
+            {% if error %}
+
+                <p class="login-error">
+                    {{ error }}
+                </p>
+
+            {% endif %}
+
+            <form
+                action="{{ url_for('login') }}"
+                method="POST"
+                class="login-form"
+            >
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter username"
+                    required
+                >
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter password"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Login
+                </button>
+
+            </form>
+
+            <a
+                href="{{ url_for('home') }}"
+                class="back-link"
+            >
+                ← Back to portfolio
+            </a>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>

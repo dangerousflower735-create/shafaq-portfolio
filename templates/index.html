@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ profile.name if profile else "Shafaq Chaudhary" }}
+        | Software Engineering Student
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- ========================= -->
+    <!-- NAVIGATION -->
+    <!-- ========================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            SC.
+        </div>
+
+        <div class="nav-links">
+
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#certificates">Certificates</a>
+            <a href="#contact">Contact</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ========================= -->
+    <!-- HERO -->
+    <!-- ========================= -->
+
+    <section id="home" class="hero">
+
+        <div class="hero-text">
+
+            <p class="small-heading">
+
+                {{ profile.title if profile else
+                "SOFTWARE ENGINEERING STUDENT" }}
+
+            </p>
+
+            <h1>
+
+                {% if profile and profile.name %}
+
+                    {% set name_parts = profile.name.split() %}
+
+                    {{ name_parts[0] }}<br>
+
+                    {% if name_parts|length > 1 %}
+
+                        <span>
+                            {{ " ".join(name_parts[1:]) }}.
+                        </span>
+
+                    {% endif %}
+
+                {% else %}
+
+                    Shafaq<br>
+
+                    <span>
+                        Chaudhary.
+                    </span>
+
+                {% endif %}
+
+            </h1>
+
+
+            <p class="intro">
+
+                {% if profile and profile.about %}
+
+                    {{ profile.about }}
+
+                {% else %}
+
+                    A Software Engineering student building her
+                    foundation in technology, programming and
+                    problem-solving.
+
+                {% endif %}
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#projects"
+                    class="primary-button"
+                >
+                    View My Work
+                </a>
+
+
+                <a
+                    href="#contact"
+                    class="secondary-button"
+                >
+                    Contact Me
+                </a>
+
+            </div>
+
+        </div>
+
+
+        {% if profile and profile.photo %}
+
+            <div class="profile-photo">
+
+                <img
+                    src="{{ url_for('static', filename='uploads/' + profile.photo) }}"
+                    alt="{{ profile.name }}"
+                >
+
+            </div>
+
+        {% else %}
+
+            <div class="hero-decoration">
+
+                <span>
+                    SC
+                </span>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- ABOUT -->
+    <!-- ========================= -->
+
+    <section
+        id="about"
+        class="section"
+    >
+
+        <p class="section-label">
+            01 — ABOUT
+        </p>
+
+        <h2>
+            Starting with curiosity,<br>
+            building with purpose.
+        </h2>
+
+
+        <p class="section-text">
+
+            {% if profile and profile.about %}
+
+                {{ profile.about }}
+
+            {% else %}
+
+                I am a Software Engineering student at Virtual
+                University, currently developing my understanding
+                of software, programming and technology.
+
+            {% endif %}
+
+        </p>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- EDUCATION -->
+    <!-- ========================= -->
+
+    <section
+        id="education"
+        class="section"
+    >
+
+        <p class="section-label">
+            02 — EDUCATION
+        </p>
+
+        <h2>
+            My academic journey.
+        </h2>
+
+
+        <div class="education-card">
+
+            {% if education %}
+
+                {% for item in education %}
+
+                <div class="education-item">
+
+                    <p class="card-label">
+                        {{ item.degree }}
+                    </p>
+
+
+                    <h3>
+                        {{ item.degree }}
+                    </h3>
+
+
+                    {% if item.result %}
+
+                        <p class="education-result">
+                            Result: {{ item.result }}
+                        </p>
+
+                    {% endif %}
+
+
+                    {% if item.status %}
+
+                        <p class="education-status">
+                            {{ item.status }}
+                        </p>
+
+                    {% endif %}
+
+
+                    {% if item.description %}
+
+                        <p class="education-description">
+                            {{ item.description }}
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="education-item">
+
+                    <h3>
+                        No education added yet.
+                    </h3>
+
+                    <p class="education-description">
+                        Education details will appear here.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- SKILLS -->
+    <!-- ========================= -->
+
+    <section
+        id="skills"
+        class="section"
+    >
+
+        <p class="section-label">
+            03 — SKILLS & LEARNING
+        </p>
+
+
+        <h2>
+            Currently learning.<br>
+            Always improving.
+        </h2>
+
+
+        <div class="skills-list">
+
+            {% if skills %}
+
+                {% for skill in skills %}
+
+                <div class="skill-item">
+
+                    <div class="skill-header">
+
+                        <h3>
+                            {{ skill.name }}
+                        </h3>
+
+                        <span>
+                            {{ skill.percentage }}%
+                        </span>
+
+                    </div>
+
+
+                    <div class="skill-bar">
+
+                        <div
+                            class="skill-progress"
+                            style="width: {{ skill.percentage }}%;"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="skill-scale">
+
+                        <span>
+                            0%
+                        </span>
+
+                        <span>
+                            100%
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>
+                    Skills will be added as I continue learning.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- PROJECTS -->
+    <!-- ========================= -->
+
+    <section
+        id="projects"
+        class="section"
+    >
+
+        <p class="section-label">
+            04 — PROJECTS
+        </p>
+
+
+        <h2>
+            Things I build.
+        </h2>
+
+
+        <div class="projects-grid">
+
+            {% if projects %}
+
+                {% for project in projects %}
+
+                <div class="project-card">
+
+                    <div class="project-number">
+                        {{ "%02d"|format(loop.index) }}
+                    </div>
+
+
+                    <h3>
+                        {{ project.title }}
+                    </h3>
+
+
+                    {% if project.description %}
+
+                        <p class="project-description">
+                            {{ project.description }}
+                        </p>
+
+                    {% endif %}
+
+
+                    {% if project.technologies %}
+
+                        <p class="project-tech">
+                            {{ project.technologies }}
+                        </p>
+
+                    {% endif %}
+
+
+                    <div class="project-links">
+
+                        {% if project.github_link %}
+
+                            <a
+                                href="{{ project.github_link }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-button"
+                            >
+                                GitHub →
+                            </a>
+
+                        {% endif %}
+
+
+                        {% if project.live_link %}
+
+                            <a
+                                href="{{ project.live_link }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-button"
+                            >
+                                Live Demo →
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="project-card">
+
+                    <div class="project-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Projects coming soon.
+                    </h3>
+
+                    <p class="project-description">
+                        This space will grow as I build and document
+                        my software engineering projects.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- CERTIFICATES -->
+    <!-- ========================= -->
+
+    <section
+        id="certificates"
+        class="section"
+    >
+
+        <p class="section-label">
+            05 — CERTIFICATIONS
+        </p>
+
+
+        <h2>
+            Certifications & achievements.
+        </h2>
+
+
+        <div class="certificates-grid">
+
+            {% if certificates %}
+
+                {% for certificate in certificates %}
+
+                <div class="certificate-card">
+
+                    <div class="certificate-number">
+                        {{ "%02d"|format(loop.index) }}
+                    </div>
+
+
+                    <h3>
+                        {{ certificate.title }}
+                    </h3>
+
+
+                    {% if certificate.organization %}
+
+                        <p class="certificate-organization">
+                            {{ certificate.organization }}
+                        </p>
+
+                    {% endif %}
+
+
+                    {% if certificate.date %}
+
+                        <p class="certificate-date">
+                            {{ certificate.date }}
+                        </p>
+
+                    {% endif %}
+
+
+                    {% if certificate.file_name %}
+
+                        <a
+                            href="{{ url_for('static', filename='uploads/' + certificate.file_name) }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="certificate-button"
+                        >
+                            View Certificate →
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="certificate-card">
+
+                    <div class="certificate-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Certifications coming soon.
+                    </h3>
+
+                    <p class="certificate-organization">
+                        Certificates and achievements will appear here.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- CONTACT -->
+    <!-- ========================= -->
+
+    <section
+        id="contact"
+        class="contact-section"
+    >
+
+        <p class="section-label">
+            06 — CONTACT
+        </p>
+
+
+        <h2>
+            Let's connect.
+        </h2>
+
+
+        {% if profile and profile.email %}
+
+            <a
+                href="mailto:{{ profile.email }}"
+                class="email"
+            >
+                {{ profile.email }}
+            </a>
+
+        {% else %}
+
+            <a
+                href="mailto:chshaya042@gmail.com"
+                class="email"
+            >
+                chshaya042@gmail.com
+            </a>
+
+        {% endif %}
+
+
+        <p class="contact-note">
+            GitHub and LinkedIn will be added soon.
+        </p>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <footer>
+
+        <p>
+            © 2026 Shafaq Chaudhary
+        </p>
+
+
+        <p>
+            Software Engineering Student
+        </p>
+
+    </footer>
+
+
+    <!-- ========================= -->
+    <!-- BACK TO TOP -->
+    <!-- ========================= -->
+
+    <button
+        id="backToTop"
+        title="Back to top"
+    >
+        ↑
+    </button>
+
+
+    <script>
+
+        const backToTop =
+            document.getElementById("backToTop");
+
+
+        window.addEventListener(
+            "scroll",
+            function () {
+
+                if (window.scrollY > 400) {
+
+                    backToTop.classList.add("show");
+
+                } else {
+
+                    backToTop.classList.remove("show");
+
+                }
+
+            }
+        );
+
+
+        backToTop.addEventListener(
+            "click",
+            function () {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

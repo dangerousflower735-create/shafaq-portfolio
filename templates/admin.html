@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Shafaq | Admin Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- ADMIN HEADER -->
+    <!-- ========================= -->
+
+    <header class="admin-header">
+
+        <div>
+            <p class="section-label">PRIVATE AREA</p>
+
+            <h1>Portfolio Dashboard</h1>
+
+            <p class="section-text">
+                Manage your portfolio from one place.
+            </p>
+        </div>
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="secondary-button"
+        >
+            Logout
+        </a>
+
+    </header>
+
+
+    <!-- ========================= -->
+    <!-- QUICK NAVIGATION -->
+    <!-- ========================= -->
+
+    <nav class="admin-nav">
+
+        <a href="#profile">Profile</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#certificates">Certificates</a>
+
+    </nav>
+
+
+    <!-- ========================= -->
+    <!-- PROFILE -->
+    <!-- ========================= -->
+
+    <section
+        id="profile"
+        class="admin-section"
+    >
+
+        <p class="section-label">01 — PROFILE</p>
+
+        <h2>Personal information.</h2>
+
+        <form
+            action="{{ url_for('update_profile') }}"
+            method="POST"
+            enctype="multipart/form-data"
+            class="admin-form"
+        >
+
+            <label>Name</label>
+
+            <input
+                type="text"
+                name="name"
+                value="{{ profile.name if profile else 'Shafaq Chaudhary' }}"
+                required
+            >
+
+            <label>Professional Title</label>
+
+            <input
+                type="text"
+                name="title"
+                value="{{ profile.title if profile else 'Software Engineering Student' }}"
+                required
+            >
+
+            <label>About</label>
+
+            <textarea
+                name="about"
+                rows="6"
+            >{{ profile.about if profile else '' }}</textarea>
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                value="{{ profile.email if profile else '' }}"
+            >
+
+            <label>Profile Photo</label>
+
+            <input
+                type="file"
+                name="photo"
+                accept="image/png,image/jpeg,image/webp"
+            >
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                Save Profile
+            </button>
+
+        </form>
+
+    </section>
+
+
+   <!-- ========================= -->
+<!-- EDUCATION -->
+<!-- ========================= -->
+
+<section
+    id="education"
+    class="admin-section"
+>
+
+    <p class="section-label">02 — EDUCATION</p>
+
+    <h2>Academic history.</h2>
+
+
+    <!-- ADD EDUCATION -->
+
+    <form
+        action="{{ url_for('add_education') }}"
+        method="POST"
+        class="admin-form"
+    >
+
+        <label>Degree / Level</label>
+
+        <input
+            type="text"
+            name="degree"
+            placeholder="e.g. Matriculation"
+            required
+        >
+
+        <label>Result</label>
+
+        <input
+            type="text"
+            name="result"
+            placeholder="e.g. 85%"
+        >
+
+        <label>Status</label>
+
+        <input
+            type="text"
+            name="status"
+            placeholder="Completed / Currently Studying"
+        >
+
+        <label>Description</label>
+
+        <textarea
+            name="description"
+            placeholder="Additional details..."
+        ></textarea>
+
+        <button
+            type="submit"
+            class="primary-button"
+        >
+            + Add Education
+        </button>
+
+    </form>
+
+
+    <!-- EXISTING EDUCATION -->
+
+    {% for item in education %}
+
+    <div class="admin-item">
+
+        <form
+            action="{{ url_for('update_education', id=item.id) }}"
+            method="POST"
+            class="education-edit-form"
+        >
+
+            <label>Degree / Level</label>
+
+            <input
+                type="text"
+                name="degree"
+                value="{{ item.degree }}"
+                required
+            >
+
+
+            <label>Result</label>
+
+            <input
+                type="text"
+                name="result"
+                value="{{ item.result or '' }}"
+            >
+
+
+            <label>Status</label>
+
+            <input
+                type="text"
+                name="status"
+                value="{{ item.status or '' }}"
+            >
+
+
+            <label>Description</label>
+
+            <textarea
+                name="description"
+            >{{ item.description or '' }}</textarea>
+
+
+            <div class="skill-edit-actions">
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Save Changes
+                </button>
+
+                <a
+                    href="{{ url_for('delete_education', id=item.id) }}"
+                    class="delete-button"
+                    onclick="return confirm('Delete this education entry?')"
+                >
+                    Delete
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    {% endfor %}
+
+</section>
+
+
+   <!-- ========================= -->
+<!-- SKILLS -->
+<!-- ========================= -->
+
+<section
+    id="skills"
+    class="admin-section"
+>
+
+    <p class="section-label">03 — SKILLS</p>
+
+    <h2>Programming skills.</h2>
+
+    <!-- ADD NEW SKILL -->
+
+    <form
+        action="{{ url_for('add_skill') }}"
+        method="POST"
+        class="admin-form"
+    >
+
+        <label>Skill / Language</label>
+
+        <input
+            type="text"
+            name="name"
+            placeholder="e.g. Python"
+            required
+        >
+
+        <label>Percentage</label>
+
+        <input
+            type="number"
+            name="percentage"
+            min="0"
+            max="100"
+            value="0"
+            required
+        >
+
+        <button
+            type="submit"
+            class="primary-button"
+        >
+            + Add Skill
+        </button>
+
+    </form>
+
+
+    <!-- EXISTING SKILLS -->
+
+    {% for skill in skills %}
+
+    <div class="admin-item">
+
+        <form
+            action="{{ url_for('update_skill', id=skill.id) }}"
+            method="POST"
+            class="skill-edit-form"
+        >
+
+            <div class="skill-edit-fields">
+
+                <div>
+
+                    <label>Skill</label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        value="{{ skill.name }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>Percentage</label>
+
+                    <input
+                        type="number"
+                        name="percentage"
+                        min="0"
+                        max="100"
+                        value="{{ skill.percentage }}"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="skill-edit-actions">
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Save Changes
+                </button>
+
+                <a
+                    href="{{ url_for('delete_skill', id=skill.id) }}"
+                    class="delete-button"
+                    onclick="return confirm('Delete this skill?')"
+                >
+                    Delete
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    {% endfor %}
+
+</section>
+
+
+   <!-- ========================= -->
+<!-- PROJECTS -->
+<!-- ========================= -->
+
+<section
+    id="projects"
+    class="admin-section"
+>
+
+    <p class="section-label">04 — PROJECTS</p>
+
+    <h2>Your projects.</h2>
+
+
+    <!-- ADD PROJECT -->
+
+    <form
+        action="{{ url_for('add_project') }}"
+        method="POST"
+        class="admin-form"
+    >
+
+        <label>Project Title</label>
+
+        <input
+            type="text"
+            name="title"
+            placeholder="e.g. Portfolio Website"
+            required
+        >
+
+
+        <label>Description</label>
+
+        <textarea
+            name="description"
+            placeholder="Describe your project..."
+        ></textarea>
+
+
+        <label>Technologies</label>
+
+        <input
+            type="text"
+            name="technologies"
+            placeholder="Python, Flask, HTML, CSS"
+        >
+
+
+        <label>GitHub Link</label>
+
+        <input
+            type="url"
+            name="github_link"
+            placeholder="https://github.com/..."
+        >
+
+
+        <label>Live Project Link</label>
+
+        <input
+            type="url"
+            name="live_link"
+            placeholder="https://..."
+        >
+
+
+        <button
+            type="submit"
+            class="primary-button"
+        >
+            + Add Project
+        </button>
+
+    </form>
+
+
+    <!-- EXISTING PROJECTS -->
+
+    {% for project in projects %}
+
+    <div class="admin-item">
+
+        <form
+            action="{{ url_for('update_project', id=project.id) }}"
+            method="POST"
+            class="project-edit-form"
+        >
+
+            <label>Project Title</label>
+
+            <input
+                type="text"
+                name="title"
+                value="{{ project.title }}"
+                required
+            >
+
+
+            <label>Description</label>
+
+            <textarea
+                name="description"
+            >{{ project.description or '' }}</textarea>
+
+
+            <label>Technologies</label>
+
+            <input
+                type="text"
+                name="technologies"
+                value="{{ project.technologies or '' }}"
+            >
+
+
+            <label>GitHub Link</label>
+
+            <input
+                type="url"
+                name="github_link"
+                value="{{ project.github_link or '' }}"
+            >
+
+
+            <label>Live Project Link</label>
+
+            <input
+                type="url"
+                name="live_link"
+                value="{{ project.live_link or '' }}"
+            >
+
+
+            <div class="skill-edit-actions">
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Save Changes
+                </button>
+
+                <a
+                    href="{{ url_for('delete_project', id=project.id) }}"
+                    class="delete-button"
+                    onclick="return confirm('Delete this project?')"
+                >
+                    Delete
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    {% endfor %}
+
+</section>
+
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <footer>
+
+        <p>© 2026 Shafaq Chaudhary</p>
+
+        <a href="{{ url_for('home') }}">
+            View Public Portfolio →
+        </a>
+
+    </footer>
+
+</body>
+
+</html>
+
+<!-- ========================= -->
+<!-- CERTIFICATES -->
+<!-- ========================= -->
+
+<section
+    id="certificates"
+    class="admin-section"
+>
+
+    <p class="section-label">05 — CERTIFICATES</p>
+
+    <h2>Your achievements.</h2>
+
+
+    <!-- ADD CERTIFICATE -->
+
+    <form
+        action="{{ url_for('add_certificate') }}"
+        method="POST"
+        enctype="multipart/form-data"
+        class="admin-form"
+    >
+
+        <label>Certificate Title</label>
+
+        <input
+            type="text"
+            name="title"
+            placeholder="e.g. Python Certificate"
+            required
+        >
+
+
+        <label>Organization</label>
+
+        <input
+            type="text"
+            name="organization"
+            placeholder="e.g. Coursera"
+        >
+
+
+        <label>Date</label>
+
+        <input
+            type="text"
+            name="date"
+            placeholder="e.g. August 2026"
+        >
+
+
+        <label>Certificate File</label>
+
+        <input
+            type="file"
+            name="certificate_file"
+            accept=".pdf,.png,.jpg,.jpeg,.webp"
+        >
+
+
+        <button
+            type="submit"
+            class="primary-button"
+        >
+            + Upload Certificate
+        </button>
+
+    </form>
+
+
+    <!-- EXISTING CERTIFICATES -->
+
+    {% for certificate in certificates %}
+
+    <div class="admin-item">
+
+        <form
+            action="{{ url_for('update_certificate', id=certificate.id) }}"
+            method="POST"
+            enctype="multipart/form-data"
+            class="certificate-edit-form"
+        >
+
+            <label>Certificate Title</label>
+
+            <input
+                type="text"
+                name="title"
+                value="{{ certificate.title }}"
+                required
+            >
+
+
+            <label>Organization</label>
+
+            <input
+                type="text"
+                name="organization"
+                value="{{ certificate.organization or '' }}"
+            >
+
+
+            <label>Date</label>
+
+            <input
+                type="text"
+                name="date"
+                value="{{ certificate.date or '' }}"
+            >
+
+
+            <label>Replace Certificate File</label>
+
+            <input
+                type="file"
+                name="certificate_file"
+                accept=".pdf,.png,.jpg,.jpeg,.webp"
+            >
+
+
+            {% if certificate.file_name %}
+
+                <p>
+                    Current file:
+                    {{ certificate.file_name }}
+                </p>
+
+            {% endif %}
+
+
+            <div class="skill-edit-actions">
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Save Changes
+                </button>
+
+
+                <a
+                    href="{{ url_for('delete_certificate', id=certificate.id) }}"
+                    class="delete-button"
+                    onclick="return confirm('Delete this certificate?')"
+                >
+                    Delete
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    {% endfor %}
+
+</section>
