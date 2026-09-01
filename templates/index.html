@@ -56,6 +56,12 @@
 
     <section id="home" class="hero">
 
+    {% if profile and profile.photo %}
+     <div class="hero-bg">
+    <img src="{{ url_for('static', filename='uploads/' + profile.photo) }}" alt="">
+    </div>
+    {% endif %}
+
         <div class="hero-text">
 
             <p class="small-heading">

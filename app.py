@@ -70,6 +70,9 @@ class Profile(db.Model):
     about = db.Column(db.Text)
     email = db.Column(db.String(200))
     photo = db.Column(db.String(300))
+    github = db.Column(db.String(300))
+    linkedin = db.Column(db.String(300))
+    instagram = db.Column(db.String(300))
 
 
 # =========================
@@ -181,6 +184,9 @@ def update_profile():
     profile.title = request.form["title"]
     profile.about = request.form["about"]
     profile.email = request.form["email"]
+    profile.github = request.form["github"]
+    profile.linkedin = request.form["linkedin"]
+    profile.instagram = request.form["instagram"]
 
     photo = request.files.get("photo")
 
@@ -200,6 +206,8 @@ def update_profile():
     db.session.commit()
 
     return redirect(url_for("admin"))
+
+  
 
 
 # =========================
@@ -499,4 +507,4 @@ with app.app_context():
 # =========================
 
 if __name__ == "__main__":
-    app.run(debug=True)
+   app.run(debug=True, port=5001)

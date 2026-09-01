@@ -115,6 +115,35 @@
                 value="{{ profile.email if profile else '' }}"
             >
 
+            <label>GitHub</label>
+
+<input
+    type="url"
+    name="github"
+    value="{{ profile.github if profile else '' }}"
+    placeholder="https://github.com/yourusername"
+>
+
+
+<label>LinkedIn</label>
+
+<input
+    type="url"
+    name="linkedin"
+    value="{{ profile.linkedin if profile else '' }}"
+    placeholder="https://linkedin.com/in/yourusername"
+>
+
+
+<label>Instagram</label>
+
+<input
+    type="url"
+    name="instagram"
+    value="{{ profile.instagram if profile else '' }}"
+    placeholder="https://instagram.com/yourusername"
+>
+
             <label>Profile Photo</label>
 
             <input
