@@ -1320,6 +1320,18 @@ function createHowTextAnswer() {
 /* =========================================================
    NEXT QUESTION
 ========================================================= */
+function hideReaction() {
+    const overlay = document.getElementById("reactionOverlay");
+    const image = document.getElementById("reactionImage");
+
+    if (overlay) {
+        overlay.classList.add("hidden");
+    }
+
+    if (image) {
+        image.src = "";
+    }
+} 
 
 function nextQuestion() {
 
