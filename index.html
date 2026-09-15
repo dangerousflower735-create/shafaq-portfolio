@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaya & Seenu 💜</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="sky">
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+    <div class="cloud cloud4"></div>
+</div>
+
+<div id="sparkles"></div>
+
+<main>
+
+    <!-- PAGE 1 -->
+    <section class="page active" id="welcomePage">
+        <div class="glass-card">
+            <p class="small-label">A little something for you...</p>
+            <h1>Aji Sunte Ho</h1>
+
+            <input
+                type="text"
+                id="sunoInput"
+                placeholder="Idhar kuch likho..."
+                autocomplete="off"
+            >
+
+            <button onclick="checkSuno()">Continue ✨</button>
+
+            <p id="sunoError" class="error"></p>
+        </div>
+    </section>
+
+
+    <!-- SALAM PAGE -->
+    <section class="page" id="salamPage">
+        <div class="glass-card">
+            <div class="image-row">
+                <img src="assets/salam.jpeg" alt="Salam">
+                <img src="assets/salam first.jpeg" alt="Salam">
+            </div>
+
+            <h1>Assalam-u-Alaikum</h1>
+
+            <p>
+                Welcome... 🌸<br>
+                I have prepared a little something for you.
+            </p>
+
+            <h2>Assalam-u-Alaikum 💜</h2>
+
+            <button onclick="showPage('sessionIntroPage')">
+                Let's Begin ✨
+            </button>
+        </div>
+    </section>
+
+
+    <!-- SESSION INTRO -->
+    <section class="page" id="sessionIntroPage">
+        <div class="glass-card">
+            <p class="small-label">Three little sessions</p>
+
+            <h1>Ready?</h1>
+
+            <div class="session-list">
+
+                <div class="session-box">
+                    <span>01</span>
+                    <div>
+                        <h3>I Want to Know More About You</h3>
+                        <p>A few honest little questions.</p>
+                    </div>
+                </div>
+
+                <div class="session-box">
+                    <span>02</span>
+                    <div>
+                        <h3>I Want to Talk About Us</h3>
+                        <p>Now things get a little more interesting.</p>
+                    </div>
+                </div>
+
+                <div class="session-box">
+                    <span>03</span>
+                    <div>
+                        <h3>A Little Something More</h3>
+                        <p>Something waiting for you at the end.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <button onclick="startSession1()">Start 💜</button>
+        </div>
+    </section>
+
+
+    <!-- SESSION 2 INTRO -->
+    <section class="page" id="session2IntroPage">
+        <div class="glass-card session-intro-card">
+
+            <p class="small-label">SESSION 02</p>
+
+            <h1>I Want to Talk About Us 💜</h1>
+
+            <p class="session-intro-text">
+                Okay... now we are getting a little more serious. 😌
+                <br><br>
+                These questions are about <strong>us</strong>,
+                the little things you may have noticed,
+                and maybe a few things you never said out loud.
+            </p>
+
+            <div class="session-intro-highlight">
+                <span>02</span>
+                <div>
+                    <strong>I WANT TO TALK ABOUT US</strong>
+                    <p>Ready? Let's see how honest you really are...</p>
+                </div>
+            </div>
+
+            <button onclick="beginSession2Questions()">
+                Let's Talk About Us 💜
+            </button>
+
+        </div>
+    </section>
+
+
+    <!-- QUESTIONS -->
+    <section class="page" id="questionPage">
+        <div class="glass-card question-card">
+
+            <div id="questionImageContainer"></div>
+
+            <p class="session-label" id="sessionLabel"></p>
+
+            <h1 id="questionNumber"></h1>
+            <h2 id="questionText"></h2>
+
+            <div id="textAnswerContainer"></div>
+
+            <div class="answer-buttons" id="answerButtons">
+                <button id="yesBtn" onclick="answerQuestion(true)">
+                    Yes 💜
+                </button>
+
+                <button id="noBtn" onclick="answerQuestion(false)">
+                    No
+                </button>
+            </div>
+
+            <button
+                id="continueTextBtn"
+                class="hidden"
+                onclick="submitTextAnswer()">
+                Continue ✨
+            </button>
+
+        </div>
+    </section>
+
+
+    <!-- SO PAGE -->
+    <section class="page" id="soPage">
+        <div class="glass-card">
+            <h1 class="huge-so">SO...</h1>
+
+            <div class="so-image">
+                <img src="assets/sonp do.jpeg" alt="SO">
+            </div>
+
+            <h2>Will you marry me? 💍</h2>
+
+            <div class="answer-buttons">
+                <button id="marryYes" onclick="answerMarriage(true)">
+                    YES 💍
+                </button>
+
+                <button id="marryNo" onclick="answerMarriage(false)">
+                    No
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- LETTER -->
+    <section class="page" id="letterPage">
+        <div class="glass-card letter-card">
+
+            <p class="small-label">You made it here...</p>
+
+            <h1>Congratulations, Seenu! 💜</h1>
+
+            <div class="letter-text">
+
+                <p>
+                    You actually answered all those questions.
+                    And honestly, that deserves more than a simple
+                    “Congratulations.”
+                </p>
+
+                <p>
+                    Maybe some of those questions were silly,
+                    some were serious, and some probably made you
+                    stop and think for a second.
+                </p>
+
+                <p>
+                    But every answer became a tiny part of this
+                    little journey. And that's what makes this
+                    moment special.
+                </p>
+
+                <p>
+                    So thank you for staying, answering, tolerating
+                    my questions, and making it all the way here.
+                </p>
+
+                <p>
+                    Whatever happens next, always remember to believe
+                    in yourself, keep going, and never underestimate
+                    the person you are becoming.
+                </p>
+
+                <p class="special-line">
+                    If you believe in yourself...
+                </p>
+
+            </div>
+
+            <h3>Sign here ✍️</h3>
+
+            <canvas id="signatureCanvas"></canvas>
+
+            <button class="small-button" onclick="clearSignature()">
+                Clear Signature
+            </button>
+
+            <h3 class="thumb-heading">
+                And put your thumb 👍
+            </h3>
+
+            <button id="thumbButton" onclick="addThumb()">
+                Press Thumb Here
+            </button>
+
+            <div id="thumbMark" class="thumb-mark hidden">
+                <div class="fingerprint">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <button
+                id="letterContinue"
+                class="hidden"
+                onclick="goToPrank()">
+                Continue 💜
+            </button>
+
+        </div>
+    </section>
+
+
+    <!-- PRANK -->
+    <section class="page" id="prankPage">
+        <div class="glass-card">
+
+            <img
+                src="assets/huehee.jpeg"
+                class="prank-image"
+                alt="Surprise"
+            >
+
+            <h1>HUEHEE 😭</h1>
+
+            <p>You got pranked.</p>
+
+            <p>
+                But don't worry... there is actually a surprise waiting.
+            </p>
+
+            <h2>Do you want to see the surprise?</h2>
+
+            <div class="answer-buttons">
+                <button onclick="showContract()">
+                    YES ✨
+                </button>
+
+                <button
+                    id="surpriseNo"
+                    onclick="moveSurpriseNo()">
+                    No
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CONTRACT -->
+    <section class="page" id="contractPage">
+        <div class="contract">
+
+            <h1>OFFICIAL MARRIAGE AGREEMENT</h1>
+
+            <h3>
+                Totally serious, definitely legally binding, probably.
+            </h3>
+
+            <div class="contract-image">
+                <img
+                    src="assets/LAST PAI.jpeg"
+                    alt="Marriage Agreement"
+                >
+            </div>
+
+
+            <div class="parties">
+
+                <!-- SHAYA -->
+                <div class="party">
+
+                    <h2>PARTY A</h2>
+
+                    <p>Me, Shaya 💜</p>
+
+                    <div class="signature-display">
+                        <p>Signature</p>
+                        <canvas id="shayaSignature"></canvas>
+                    </div>
+
+                    <div class="contract-thumb">
+                        <p>Thumb</p>
+                        <div class="small-fingerprint"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- SEENU -->
+                <div class="party">
+
+                    <h2>PARTY B</h2>
+
+                    <p>You, Seenu 💜</p>
+
+                    <div class="photo-upload">
+
+                        <label for="seenuPhoto">
+                            Upload your picture
+                        </label>
+
+                        <input
+                            type="file"
+                            id="seenuPhoto"
+                            accept="image/*"
+                            onchange="checkSeenuPhoto(event)"
+                        >
+
+                        <div id="photoPreview"></div>
+
+                        <p id="photoMessage"></p>
+
+                    </div>
+
+
+                    <div class="signature-display">
+                        <p>Your Signature</p>
+                        <canvas id="seenuSignature"></canvas>
+                    </div>
+
+
+                    <div class="contract-thumb">
+
+                        <p>Your Thumb</p>
+
+                        <div
+                            id="seenuThumb"
+                            class="small-fingerprint">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TERMS -->
+            <div class="terms">
+
+                <h2>TERMS & CONDITIONS</h2>
+
+                <ol>
+
+                    <li>
+                        Party B must tolerate lifetime HMPH from Party A.
+                    </li>
+
+                    <li>
+                        Party B must serve Party A questions every other minute.
+                    </li>
+
+                    <li>
+                        Party B is a lifetime gym trainer of Party A.
+
+                        <small>
+                            (We don't tell anyone too much about the gym thing.)
+                        </small>
+                    </li>
+
+                    <li>
+                        Party B must give special attention, care and priority
+                        to Party A and to no one else in the world,
+                        especially girls and women and... HMPH.
+                    </li>
+
+                    <li>
+                        Party B must tolerate some nakhras from Party A.
+
+                        <small>
+                            (Don't worry, Party A is scared to lose Party B,
+                            so she won't show too many nakhras.)
+                        </small>
+                    </li>
+
+                    <li>
+                        Party A will always tell the truth to Party B
+                        and wants the same in return.
+                    </li>
+
+                </ol>
+
+
+                <h3>
+                    If Party B has any terms of their own,
+                    they may add them here.
+                </h3>
+
+
+                <!-- EXTRA TERMS INPUT -->
+                <div class="extra-term-input-row">
+
+                    <input
+                        type="text"
+                        id="extraTermInput"
+                        class="extra-term-input"
+                        placeholder="Write your own term here..."
+                        maxlength="250"
+                    >
+
+                    <button
+                        type="button"
+                        class="small-button"
+                        onclick="addExtraTerm()">
+                        + Add Term
+                    </button>
+
+                </div>
+
+
+                <!-- ADDED TERMS -->
+                <div id="extraTerms"></div>
+
+
+                <button
+                    class="final-contract-button"
+                    onclick="finishContract()">
+                    I Accept This Completely Serious Agreement 💍
+                </button>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- GOOD NIGHT -->
+    <section class="page" id="goodnightPage">
+        <div class="glass-card goodnight-card">
+
+            <p class="small-label">
+                And that's the end...
+            </p>
+
+            <h1>Good Night Love 🌙</h1>
+
+            <img
+                src="assets/goodnight.png"
+                class="goodnight-image"
+                alt="Good Night"
+            >
+
+            <div class="goodnight-text">
+                <p>Apna khyaal rakhna, Seenu. 💜</p>
+                <p>Sweet dreams...</p>
+                <p>Or my dreams. ✨</p>
+            </div>
+
+            <h2>Shaya & Seenu</h2>
+
+        </div>
+    </section>
+
+</main>
+
+
+<!-- POPUP -->
+<div id="reactionOverlay" class="reaction-overlay hidden">
+
+    <div class="reaction-popup">
+
+        <img
+            id="reactionImage"
+            src=""
+            alt="Reaction"
+        >
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
