@@ -739,60 +739,34 @@ function showStaticQuestionImage(filename) {
    REACTION POPUP
 ========================================================= */
 
-function showReaction(
-    filename,
-    duration = 1800
-) {
-
+function showReaction(filename, duration = 1800) {
     if (!filename) return;
 
-    const overlay =
-        document.getElementById(
-            "reactionOverlay"
-        );
-
-    const image =
-        document.getElementById(
-            "reactionImage"
-        );
+    const overlay = document.getElementById("reactionOverlay");
+    const image = document.getElementById("reactionImage");
 
     if (!overlay || !image) return;
 
-    image.src =
-        "assets/" + filename;
+    // Always use the live site's absolute assets path
+    const imagePath = "/assets/" + filename;
 
-    overlay.classList.remove("hidden");
+    image.onload = function () {
+        overlay.classList.remove("hidden");
+    };
+
+    image.onerror = function () {
+        console.error("Popup image failed:", imagePath);
+        overlay.classList.add("hidden");
+    };
+
+    image.src = "";
+    image.src = imagePath;
 
     clearTimeout(popupTimer);
 
-    popupTimer =
-        setTimeout(
-            hideReaction,
-            duration
-        );
-}
-
-
-function hideReaction() {
-
-    const overlay =
-        document.getElementById(
-            "reactionOverlay"
-        );
-
-    if (!overlay) return;
-
-    overlay.classList.add("hidden");
-
-    const image =
-        document.getElementById(
-            "reactionImage"
-        );
-
-    if (image) {
-
-        image.src = "";
-    }
+    popupTimer = setTimeout(function () {
+        hideReaction();
+    }, duration);
 }
 
 
